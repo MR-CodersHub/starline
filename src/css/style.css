@@ -703,6 +703,12 @@ footer .logo span {
     letter-spacing: -1px;
 }
 
+.listings-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 60px;
+}
+
 .property-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -1068,6 +1074,11 @@ form.newsletter-form input {
         flex-direction: column;
         gap: 20px;
         text-align: center;
+    }
+
+    .listings-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
     }
 
     .property-grid {
