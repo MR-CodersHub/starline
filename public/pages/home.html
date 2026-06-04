@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Starline | Find Your Dream Property Worldwide</title>
+    <!-- Relative path to CSS -->
+    <link rel="stylesheet" href="../../src/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../assets/logos/favicon.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Specific hero adjustments for the new fields */
+        .hero-search {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 10px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-soft);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-search input,
+        .hero-search select {
+            border: none;
+            padding: 15px;
+            outline: none;
+            font-size: 0.9rem;
+            background: transparent;
+        }
+
+        .hero-search select {
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hero-search {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-search select {
+                border: none;
+                border-top: 1px solid var(--border);
+                border-bottom: 1px solid var(--border);
+            }
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-soft);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            box-shadow: var(--shadow-soft);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <!-- Gradient accent line at top -->
+        <div class="header-accent-bar"></div>
+        <div class="nav-container">
+            <!-- Row 1: Logo | Nav (centered) | Actions -->
+            <div class="nav-top-row">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="../../index.html">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        <span>Starline</span>
+                    </a>
+                </div>
+                <!-- Centered Nav Links -->
+                <nav class="nav-links">
+                    <a href="../../index.html">Home</a>
+                    <a href="home.html" class="nav-active">Home 2</a>
+                    <a href="../../signature.html">Curated Estates</a>
+                    <a href="listings.html">Listings</a>
+                    <a href="../../blog.html">Blog</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <!-- Right: Account + Hamburger -->
+                <div class="nav-actions">
+                    <a href="../../login.html" id="dashboard-link" class="nav-cta" title="Account" style="width: 40px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Row 2: Search Bar -->
+            <div class="nav-search-row">
+                <div class="nav-search-glass">
+                    <input type="text" id="nav-search-query" placeholder="City, neighborhood, or property name...">
+                    <span class="nav-search-sep"></span>
+                    <input type="number" id="nav-search-investment" placeholder="Budget (USD)">
+                    <span class="nav-search-sep"></span>
+                    <select id="nav-search-type">
+                        <option value="buy">Purchase</option>
+                        <option value="rent">Lease</option>
+                    </select>
+                    <button class="nav-search-btn" id="nav-search-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Discover
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 2) Immersive Luxury Hero Section -->
+        <section class="hero"
+            style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000');">
+            <div class="hero-content">
+                <h1>Architecture <br>As Art.</h1>
+                <p>Discover homes that define the intersection of natural beauty and human ingenuity. Experience radical
+                    transparency.</p>
+
+                <div style="margin-top: 20px;">
+                    <a href="../../index.html" class="btn-outline"
+                        style="border-color: rgba(255,255,255,0.3); color: white; backdrop-filter: blur(5px);">Back to
+                        Home 1</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3) Featured Properties Section -->
+        <section class="section-padding">
+            <div class="section-header">
+                <h2>Featured Properties</h2>
+                <a href="listings.html" class="btn-outline">View All</a>
+            </div>
+
+            <div class="property-grid">
+                <!-- Property Card 1 -->
+                <div class="property-card" onclick="location.href='property.html?id=7'" style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800" alt="Villa"
+                        class="property-thumb">
+                    <div class="property-content">
+                        <div class="property-price">$4,500,000</div>
+                        <div class="property-title">The Glass House</div>
+                        <div class="property-location">Malibu, CA</div>
+                        <div class="property-details">
+                            <span>5 Beds</span>
+                            <span>4 Baths</span>
+                            <span>4,200 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div class="property-card" onclick="location.href='property.html?id=8'" style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800" alt="Apartment"
+                        class="property-thumb">
+                    <div class="property-content">
+                        <div class="property-price">$2,800,000</div>
+                        <div class="property-title">Modern Minimalist Loft</div>
+                        <div class="property-location">SoHo, New York</div>
+                        <div class="property-details">
+                            <span>3 Beds</span>
+                            <span>2 Baths</span>
+                            <span>2,100 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div class="property-card" onclick="location.href='property.html?id=9'" style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=800" alt="House"
+                        class="property-thumb">
+                    <div class="property-content">
+                        <div class="property-price">$1,200,000</div>
+                        <div class="property-title">Zen Garden Estate</div>
+                        <div class="property-location">Kizu, Kyoto</div>
+                        <div class="property-details">
+                            <span>4 Beds</span>
+                            <span>3 Baths</span>
+                            <span>3,500 sqft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4) Why Choose Us Section -->
+        <section class="section-padding section-bg-soft" style="border-radius: 0;">
+            <div style="max-width: var(--max-width); margin: 0 auto;">
+                <div style="text-align: center; margin-bottom: 60px;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 16px;">Why Choose Starline</h2>
+                    <p style="color: var(--text-muted);">Crafting a seamless property journey for the modern visionary.
+                    </p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item"
+                        style="background: var(--white); border: 1px solid var(--border-soft); box-shadow: var(--shadow-sm);">
+                        <h3>Curated Design</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">We select properties that prioritize
+                            architectural excellence and aesthetic integrity.</p>
+                    </div>
+                    <div class="feature-item"
+                        style="background: var(--white); border: 1px solid var(--border-soft); box-shadow: var(--shadow-sm);">
+                        <h3>Radical Honesty</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">No hidden fees or surprises. We believe
+                            in
+                            full transparency from search to signing.</p>
+                    </div>
+                    <div class="feature-item"
+                        style="background: var(--white); border: 1px solid var(--border-soft); box-shadow: var(--shadow-sm);">
+                        <h3>Global Reach</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Access high-end listings across the
+                            world's
+                            most desirable minimalist gateways.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5) Testimonials Section -->
+        <section class="section-padding">
+            <h2 style="text-align: center; margin-bottom: 48px;">What Our Clients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card" style="box-shadow: var(--shadow-sm); border-color: var(--border);">
+                    <p class="testimonial-text">"The minimalist approach of Starline saved me hours of clutter. I
+                        found my perfect home in Shibuya within a week."</p>
+                    <p class="testimonial-author">Kenji Nakamura</p>
+                </div>
+                <div class="testimonial-card" style="box-shadow: var(--shadow-sm); border-color: var(--border);">
+                    <p class="testimonial-text">"Finally, a real estate agency that values design as much as I do. The
+                        process was completely digital and stress-free."</p>
+                    <p class="testimonial-author">Sarah Jenkins</p>
+                </div>
+                <div class="testimonial-card" style="box-shadow: var(--shadow-sm); border-color: var(--border);">
+                    <p class="testimonial-text">"Luxury isn't about noise, it's about space. Starline understands
+                        this better than anyone else."</p>
+                    <p class="testimonial-author">Marco Rossi</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6) Call-To-Action Section -->
+        <section class="section-padding section-bg-ghost">
+            <div
+                style="text-align: center; background: var(--white); padding: 80px 40px; border-radius: var(--border-radius-lg); border: 1px solid var(--border-soft); box-shadow: var(--shadow-md); max-width: 1200px; margin: 0 auto;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 24px;">Transform Your Lifestyle.</h2>
+                <p
+                    style="color: var(--text-muted); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto;">
+                    Starline is more than a real estate agency. It's a gateway to the most inspired living spaces in the
+                    world.</p>
+                <a href="listings.html" class="nav-cta" style="margin: 0; padding: 16px 48px;">Get
+                    Started</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 24px;">
+                    <a href="../../index.html"
+                        style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        Starline
+                    </a>
+                </div>
+                <p>The world's first minimalist real estate platform for high-end international living. Experience
+                    transparency, design, and luxury. Built by MrCodersHub.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="home.html">Home 2</a></li>
+                    <li><a href="listings.html">Listings</a></li>
+                    <li><a href="../../signature.html">Curated Estates</a></li>
+                    <li><a href="../../blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="../../privacy.html">Privacy Policy</a></li>
+                    <li><a href="../../terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-newsletter">
+                <h4>Join Our Journal</h4>
+                <p style="margin-bottom: 20px;">Dispatches from the intersection of architecture, wealth, and design.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email Address" required
+                        style="width: 100%; padding: 15px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: var(--border-radius-sm); margin-bottom: 15px; outline: none; font-size: 0.9rem;">
+                    <button type="submit" class="nav-cta" style="width: 100%; margin: 0;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 MrCodersHub. All rights reserved.</div>
+            <div style="display: flex; gap: 20px;">
+                <a href="../../privacy.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+                <a href="../../terms.html" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Relative path to JS -->
+    <script src="../../src/js/admin-state.js"></script>
+    <script src="../../src/js/ui-utils.js"></script>
+    <script src="../../src/js/search.js"></script>
+</body>
+
+</html>

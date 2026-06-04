@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Pricing | Starline</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/logos/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            padding: 50px 40px;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-soft);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .popular-badge {
+            background: var(--accent);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 20px;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 24px 0;
+            letter-spacing: -2px;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 40px;
+            flex-grow: 1;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-soft);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 12px;
+        }
+
+        @media (max-width: 992px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <!-- Gradient accent line at top -->
+        <div class="header-accent-bar"></div>
+        <div class="nav-container">
+            <!-- Row 1: Logo | Nav (centered) | Actions -->
+            <div class="nav-top-row">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        <span>Starline</span>
+                    </a>
+                </div>
+                <!-- Centered Nav Links -->
+                <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="public/pages/home.html">Home 2</a>
+                    <a href="signature.html">Curated Estates</a>
+                    <a href="public/pages/listings.html">Listings</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="public/pages/about.html">About</a>
+                    <a href="public/pages/contact.html">Contact</a>
+                </nav>
+                <!-- Right: Account + Hamburger -->
+                <div class="nav-actions">
+                    <a href="login.html" id="dashboard-link" class="nav-cta" title="Account" style="width: 40px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Row 2: Search Bar -->
+            <div class="nav-search-row">
+                <div class="nav-search-glass">
+                    <input type="text" id="nav-search-query" placeholder="City, neighborhood, or property name...">
+                    <span class="nav-search-sep"></span>
+                    <input type="number" id="nav-search-investment" placeholder="Budget (USD)">
+                    <span class="nav-search-sep"></span>
+                    <select id="nav-search-type">
+                        <option value="buy">Purchase</option>
+                        <option value="rent">Lease</option>
+                    </select>
+                    <button class="nav-search-btn" id="nav-search-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Discover
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="section-padding">
+        <div class="container">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto 80px;">
+                <h1 style="font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 20px;">Transparent Professional Fees.
+                </h1>
+                <p style="color: var(--text-muted); font-size: 1.1rem;">Whether you're a single-asset seller or a global
+                    fund manager, we have a tiered advisory model to suit your objectives.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Tier 1 -->
+                <div class="pricing-card">
+                    <h3>Essential Advisory</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Perfect for local residential sales.</p>
+                    <div class="price">1.5<span>%</span></div>
+                    <ul class="feature-list">
+                        <li>Ã¢Å“â€œ Professional Cinematics</li>
+                        <li>Ã¢Å“â€œ Major Portal Syndication</li>
+                        <li>Ã¢Å“â€œ Dedicated Transaction Desk</li>
+                        <li>Ã¢Å“â€œ Standard Documentation</li>
+                    </ul>
+                    <a href="public/pages/contact.html" class="btn-outline" style="text-align: center;">Get Started</a>
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Exclusive</div>
+                    <h3>Premier Collection</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">High-exposure global marketing.</p>
+                    <div class="price">2.5<span>%</span></div>
+                    <ul class="feature-list">
+                        <li>Ã¢Å“â€œ International PR Placement</li>
+                        <li>Ã¢Å“â€œ Private Office Representation</li>
+                        <li>Ã¢Å“â€œ 3D Virtual Immersion</li>
+                        <li>Ã¢Å“â€œ Priority Off-Market Matching</li>
+                        <li>Ã¢Å“â€œ Heritage Storytelling</li>
+                    </ul>
+                    <a href="public/pages/contact.html" class="nav-cta" style="text-align: center; margin: 0;">Begin
+                        Partnership</a>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="pricing-card">
+                    <h3>Institutional</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">For funds and large portfolios.</p>
+                    <div class="price">Custom</div>
+                    <ul class="feature-list">
+                        <li>Ã¢Å“â€œ Multi-asset Strategy</li>
+                        <li>Ã¢Å“â€œ Tax & Legal Optimization</li>
+                        <li>Ã¢Å“â€œ White-label Portals</li>
+                        <li>Ã¢Å“â€œ Strategic Divestment Plans</li>
+                        <li>Ã¢Å“â€œ 24/7 Advisory Access</li>
+                    </ul>
+                    <a href="public/pages/contact.html" class="btn-outline" style="text-align: center;">Inquire
+                        Privately</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 24px;">
+                    <a href="index.html"
+                        style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        Starline
+                    </a>
+                </div>
+                <p>The world's first minimalist real estate platform for high-end international living. Experience
+                    transparency, design, and luxury. Built by MrCodersHub.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="public/pages/home.html">Home 2</a></li>
+                    <li><a href="public/pages/listings.html">Listings</a></li>
+                    <li><a href="signature.html">Curated Estates</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="public/pages/contact.html">Help Center</a></li>
+                    <li><a href="public/pages/contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-newsletter">
+                <h4>Join Our Journal</h4>
+                <p style="margin-bottom: 20px;">Dispatches from the intersection of architecture, wealth, and design.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email Address" required
+                        style="width: 100%; padding: 15px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: var(--border-radius-sm); margin-bottom: 15px; outline: none; font-size: 0.9rem;">
+                    <button type="submit" class="nav-cta" style="width: 100%; margin: 0;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 MrCodersHub. All rights reserved.</div>
+            <div style="display: flex; gap: 30px;">
+                <a href="privacy.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+                <a href="terms.html" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core JS -->
+    <script src="src/js/admin-state.js"></script>
+    <script src="src/js/ui-utils.js"></script>
+    <script src="src/js/listings.js"></script>
+    <script src="src/js/search.js"></script>
+</body>
+
+</html>

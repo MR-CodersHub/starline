@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon | Starline</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/logos/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .soon-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--text-main);
+            color: var(--white);
+            padding: 0 5%;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin: 60px 0;
+        }
+
+        .count-item {
+            text-align: center;
+        }
+
+        .count-num {
+            font-size: 4rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .count-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="soon-container">
+        <div style="max-width: 800px;">
+            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="color:white"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor"></path></svg>Starline</a>
+            </div>
+            <h1 style="font-size: 3.5rem; letter-spacing: -2px; line-height: 1;">Architectural Significance, Redefined.
+            </h1>
+            <p style="margin-top: 24px; font-size: 1.1rem; opacity: 0.7;">We are currently curating the most exclusive
+                digital experience in real estate. The wait will be worth it.</p>
+
+            <div class="countdown">
+                <div class="count-item">
+                    <span class="count-num">14</span>
+                    <span class="count-label">Days</span>
+                </div>
+                <div class="count-item">
+                    <span class="count-num">22</span>
+                    <span class="count-label">Hours</span>
+                </div>
+                <div class="count-item">
+                    <span class="count-num">09</span>
+                    <span class="count-label">Minutes</span>
+                </div>
+            </div>
+
+            <div style="max-width: 400px; margin: 0 auto;">
+                <p style="font-size: 0.85rem; margin-bottom: 20px;">Get notified when we go live.</p>
+                <div style="display: flex; gap: 10px;">
+                    <input type="email" placeholder="Email Address"
+                        style="flex: 1; padding: 15px; border-radius: 4px; border: none; outline: none;">
+                    <button class="nav-cta" style="margin: 0; background: var(--white); color: #000;">Notify Me</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

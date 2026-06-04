@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Starline | Find Your Dream Property Worldwide</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/home.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logos/favicon.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Specific hero adjustments for the new fields */
+        .hero-search {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 10px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-soft);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-search input,
+        .hero-search select {
+            border: none;
+            padding: 15px;
+            outline: none;
+            font-size: 0.9rem;
+            background: transparent;
+        }
+
+        .hero-search select {
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hero-search {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-search select {
+                border: none;
+                border-top: 1px solid var(--border);
+                border-bottom: 1px solid var(--border);
+            }
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-soft);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            box-shadow: var(--shadow-soft);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <!-- Gradient accent line at top -->
+        <div class="header-accent-bar"></div>
+        <div class="nav-container">
+            <!-- Row 1: Logo | Nav (centered) | Actions -->
+            <div class="nav-top-row">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z"
+                                fill="currentColor" stroke="none"></path>
+                        </svg>
+                        <span>Starline</span>
+                    </a>
+                </div>
+                <!-- Centered Nav Links -->
+                <nav class="nav-links">
+                    <a href="index.html" class="nav-active">Home</a>
+                    <a href="public/pages/home.html">Home 2</a>
+                    <a href="signature.html">Curated Estates</a>
+                    <a href="public/pages/listings.html">Listings</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="public/pages/about.html">About</a>
+                    <a href="public/pages/contact.html">Contact</a>
+                </nav>
+                <!-- Right: Account + Hamburger -->
+                <div class="nav-actions">
+                    <a href="login.html" id="dashboard-link" class="nav-cta" title="Account"
+                        style="width: 40px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Row 2: Search Bar -->
+            <div class="nav-search-row">
+                <div class="nav-search-glass">
+                    <input type="text" id="nav-search-query" placeholder="City, neighborhood, or property name...">
+                    <span class="nav-search-sep"></span>
+                    <input type="number" id="nav-search-investment" placeholder="Budget (USD)">
+                    <span class="nav-search-sep"></span>
+                    <select id="nav-search-type">
+                        <option value="buy">Purchase</option>
+                        <option value="rent">Lease</option>
+                    </select>
+                    <button class="nav-search-btn" id="nav-search-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Discover
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <!-- 2) Immersive Luxury Hero Section -->
+        <section class="hero"
+            style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000');">
+            <div class="hero-editorial-grid">
+                <!-- Left: Big Typography -->
+                <div class="hero-editorial-left">
+                    <h1>Spaces<br>Designed For<br>Significant<br>Living.</h1>
+                    <p>We curate homes that represent the highest intersections of spatial poetry and structural
+                        integrity. Experience raw volume, natural light, and radical transparency.</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="public/pages/listings.html" class="nav-cta"
+                            style="margin: 0; padding: 14px 32px;">Explore Collection</a>
+                        <a href="public/pages/home.html" class="btn-outline"
+                            style="border-color: rgba(255,255,255,0.4); color: white; backdrop-filter: blur(8px); padding: 14px 32px;">View
+                            Alternate Grid</a>
+                    </div>
+                </div>
+                <!-- Right: Glassmorphic Spotlight Card -->
+                <div class="hero-editorial-right">
+                    <div class="hero-glass-card">
+                        <span class="glass-tag">Featured Masterpiece</span>
+                        <h3 class="glass-title">The Glass Pavilion</h3>
+                        <div class="glass-location">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            Beverly Hills, California
+                        </div>
+                        <div class="glass-stats">
+                            <span>6 Beds</span>
+                            <span>8 Baths</span>
+                            <span>8,500 sqft</span>
+                        </div>
+                        <div class="glass-price">$12,400,000</div>
+                        <a href="public/pages/property.html?id=1" class="glass-btn">View Architecture</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3) Featured Properties Section -->
+        <section class="section-padding">
+            <div class="section-header" style="margin-bottom: 30px;">
+                <h2>Featured Properties</h2>
+                <a href="public/pages/listings.html" class="btn-outline">View All</a>
+            </div>
+
+            <!-- Dynamic Collection Filter Tabs -->
+            <div class="collections-tabs">
+                <button class="tab-btn active" data-filter="all">All Masterpieces</button>
+                <button class="tab-btn" data-filter="glass">Avant-Garde Glass</button>
+                <button class="tab-btn" data-filter="brutalism">Modern Brutalism</button>
+                <button class="tab-btn" data-filter="chalet">Zen & Chalets</button>
+            </div>
+
+            <div class="property-grid">
+                <!-- Property Card 1 -->
+                <div class="property-card" onclick="location.href='public/pages/property.html?id=7'"
+                    style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800" alt="Villa"
+                        class="property-thumb">
+                    <div class="property-content">
+                        <div class="property-price">$4,500,000</div>
+                        <div class="property-title">The Glass House</div>
+                        <div class="property-location">Malibu, CA</div>
+                        <div class="property-details">
+                            <span>5 Beds</span>
+                            <span>4 Baths</span>
+                            <span>4,200 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div class="property-card" onclick="location.href='public/pages/property.html?id=8'"
+                    style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800" alt="Apartment"
+                        class="property-thumb">
+                    <div class="property-content">
+                        <div class="property-price">$2,800,000</div>
+                        <div class="property-title">Modern Minimalist Loft</div>
+                        <div class="property-location">SoHo, New York</div>
+                        <div class="property-details">
+                            <span>3 Beds</span>
+                            <span>2 Baths</span>
+                            <span>2,100 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div class="property-card" onclick="location.href='public/pages/property.html?id=9'"
+                    style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=800" alt="House"
+                        class="property-thumb">
+                    <div class="property-content">
+                        <div class="property-price">$1,200,000</div>
+                        <div class="property-title">Zen Garden Estate</div>
+                        <div class="property-location">Kizu, Kyoto</div>
+                        <div class="property-details">
+                            <span>4 Beds</span>
+                            <span>3 Baths</span>
+                            <span>3,500 sqft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4) The Philosophy of Space Section -->
+        <section class="philosophy-section">
+            <div class="philosophy-header">
+                <h2>The Philosophy of Space</h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6;">At Starline, we do not view
+                    real estate as commodities. We curate environments where architectural intent and daily ritual
+                    coexist in quiet harmony.</p>
+            </div>
+            <div class="philosophy-grid">
+                <!-- Pillar 1 -->
+                <div class="philosophy-item">
+                    <div class="philosophy-num">01</div>
+                    <h3>Volumetric Flow</h3>
+                    <p>We prioritize layouts that respect human scale and movement. By focusing on expansive sightlines,
+                        high ceilings, and double-height volumes, we create spaces that offer room to breathe.</p>
+                </div>
+                <!-- Pillar 2 -->
+                <div class="philosophy-item">
+                    <div class="philosophy-num">02</div>
+                    <h3>Material Honesty</h3>
+                    <p>We value raw textures in their natural state. Our catalog highlights structures crafted from
+                        untreated timber, structural concrete, blackened steel, and hand-honed granite, celebrating
+                        their physical properties.</p>
+                </div>
+                <!-- Pillar 3 -->
+                <div class="philosophy-item">
+                    <div class="philosophy-num">03</div>
+                    <h3>Curatorial Discretion</h3>
+                    <p>Unlike traditional portals, our collection is highly gated. We actively reject real estate
+                        clutter, offering only architecturally significant projects alongside a transaction process
+                        defined by direct transparency.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4.5) Architect Spotlight Section -->
+        <section class="architect-spotlight">
+            <div class="spotlight-content">
+                <span
+                    style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: var(--text-light);">Featured
+                    Studio</span>
+                <h2>Adrian van der Berg:<br>Brutalist & Glass Intersections</h2>
+                <p>Renowned for his raw volumetric concrete structures and floating glass frames, Adrian van der Berg
+                    has shaped modern minimalist luxury. His works focus on stripping away architectural excess to let
+                    raw materials interact with the surrounding natural elements.</p>
+                <p>We are proud to present his latest masterpiece, <strong>The Obsidian Manor</strong>, in our exclusive
+                    curated portfolio. A structure defined by geometric steel cantilevers and disappearing
+                    floor-to-ceiling glass paneling.</p>
+                <a href="showcase.html" class="btn-outline" style="padding: 14px 36px; margin-top: 10px;">Enter The
+                    Showcase</a>
+            </div>
+            <div class="spotlight-img-container">
+                <img src="assets/obsidian_manor.png" alt="The Obsidian Manor" class="spotlight-img">
+                <div class="spotlight-overlay">
+                    <div class="spotlight-overlay-info">
+                        <h4>The Obsidian Manor</h4>
+                        <p>Los Angeles, California Ã¢â‚¬Â¢ $12,500,000</p>
+                    </div>
+                    <a href="showcase.html" class="spotlight-overlay-link" aria-label="View Manor">Ã¢â€ â€™</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5) Testimonials Section -->
+        <section class="section-padding" style="background: var(--white); border-bottom: 1px solid var(--border-soft);">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <span
+                    style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; font-weight: 700; color: var(--text-light);">Client
+                    Narratives</span>
+                <h2 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -1.5px; margin-top: 10px;">Trusted By
+                    The Visionary</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card"
+                    style="box-shadow: var(--shadow-sm); border: 1px solid var(--border); padding: 40px; border-radius: var(--border-radius-md); display: flex; flex-direction: column; gap: 20px;">
+                    <p class="testimonial-text"
+                        style="font-style: italic; color: var(--text-muted); line-height: 1.8; font-size: 1rem;">"The
+                        minimalist approach of Starline saved me hours of clutter. I found my perfect home in Shibuya
+                        within a week. The transaction was completely direct."</p>
+                    <div style="border-top: 1px solid var(--border-soft); padding-top: 15px;">
+                        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Kenji Nakamura</h4>
+                        <p
+                            style="font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin: 0;">
+                            Minimalist Architect</p>
+                    </div>
+                </div>
+                <div class="testimonial-card"
+                    style="box-shadow: var(--shadow-sm); border: 1px solid var(--border); padding: 40px; border-radius: var(--border-radius-md); display: flex; flex-direction: column; gap: 20px;">
+                    <p class="testimonial-text"
+                        style="font-style: italic; color: var(--text-muted); line-height: 1.8; font-size: 1rem;">
+                        "Finally, a real estate agency that values design as much as I do. The process was completely
+                        digital and stress-free. Every estate in the catalog is a masterwork."</p>
+                    <div style="border-top: 1px solid var(--border-soft); padding-top: 15px;">
+                        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Sarah Jenkins</h4>
+                        <p
+                            style="font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin: 0;">
+                            Art Director</p>
+                    </div>
+                </div>
+                <div class="testimonial-card"
+                    style="box-shadow: var(--shadow-sm); border: 1px solid var(--border); padding: 40px; border-radius: var(--border-radius-md); display: flex; flex-direction: column; gap: 20px;">
+                    <p class="testimonial-text"
+                        style="font-style: italic; color: var(--text-muted); line-height: 1.8; font-size: 1rem;">"Luxury
+                        isn't about noise, it's about space. Starline understands this better than anyone else. The
+                        radical transparency from search to signing was refreshing."</p>
+                    <div style="border-top: 1px solid var(--border-soft); padding-top: 15px;">
+                        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Marco Rossi</h4>
+                        <p
+                            style="font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin: 0;">
+                            Product Designer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6) Call-To-Action Section -->
+        <section class="section-padding" style="background: var(--bg-soft); border-top: 1px solid var(--border);">
+            <div
+                style="text-align: center; background: var(--white); padding: 100px 60px; border-radius: var(--border-radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-lg); max-width: var(--max-width); margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 30px;">
+                <span
+                    style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; font-weight: 700; color: var(--text-light);">Acquisitions
+                    & Divestments</span>
+                <h2
+                    style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -2px; margin: 0; line-height: 1.1;">
+                    Transform Your Spatial Reality.</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0; font-size: 1.1rem; line-height: 1.8;">
+                    Starline is more than a real estate agency. We are a curatorial platform bridging the gap between
+                    architectural art and daily life. Connect with an advisor to begin your search.</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
+                    <a href="public/pages/contact.html" class="nav-cta" style="margin: 0; padding: 18px 48px;">Request
+                        Private Consultation</a>
+                    <a href="public/pages/listings.html" class="btn-outline"
+                        style="padding: 18px 48px; border-radius: 50px;">Browse Collections</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 24px;">
+                    <a href="index.html"
+                        style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z"
+                                fill="currentColor" stroke="none"></path>
+                        </svg>
+                        <span style="font-weight: 800; letter-spacing: -0.5px;">Starline</span>
+                    </a>
+                </div>
+                <p>The world's first minimalist real estate platform for high-end international living. Experience
+                    transparency, design, and luxury. Built by MrCodersHub.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="public/pages/home.html">Home 2</a></li>
+                    <li><a href="public/pages/listings.html">Listings</a></li>
+                    <li><a href="signature.html">Curated Estates</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="public/pages/contact.html">Help Center</a></li>
+                    <li><a href="public/pages/contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-newsletter">
+                <h4>Join Our Journal</h4>
+                <p style="margin-bottom: 20px;">Dispatches from the intersection of architecture, wealth, and design.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email Address" required
+                        style="width: 100%; padding: 15px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: var(--border-radius-sm); margin-bottom: 15px; outline: none; font-size: 0.9rem;">
+                    <button type="submit" class="nav-cta" style="width: 100%; margin: 0;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 MrCodersHub. All rights reserved.</div>
+            <div style="display: flex; gap: 20px;">
+                <a href="privacy.html" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+                <a href="terms.html" style="color: inherit; text-decoration: none;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core JS -->
+    <script src="src/js/admin-state.js"></script>
+    <script src="src/js/ui-utils.js"></script>
+    <script src="src/js/listings.js"></script>
+    <script src="src/js/search.js"></script>
+
+    <!-- Custom dynamic filter logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const grid = document.querySelector('.property-grid');
+
+            if (!tabs.length || !grid) return;
+
+            // Function to re-render properties on homepage based on filter
+            function renderFilteredProperties(filterVal) {
+                const props = typeof AdminState !== 'undefined' ? AdminState.getProperties() : [];
+                grid.innerHTML = '';
+
+                // Helper to check if property matches category
+                function matchesFilter(prop, filter) {
+                    if (filter === 'all') return true;
+                    const name = prop.name.toLowerCase();
+                    const desc = prop.description.toLowerCase();
+                    const features = prop.features ? prop.features.map(f => f.toLowerCase()).join(' ') : '';
+
+                    if (filter === 'glass') {
+                        return name.includes('glass') || desc.includes('glass') || features.includes('glass');
+                    }
+                    if (filter === 'brutalism') {
+                        return name.includes('monolith') || name.includes('loft') || desc.includes('concrete') || desc.includes('brutalism') || desc.includes('steel') || name.includes('observatory') || features.includes('concrete') || features.includes('steel');
+                    }
+                    if (filter === 'chalet') {
+                        return name.includes('heights') || name.includes('sanctuary') || name.includes('zen') || desc.includes('mountain') || desc.includes('forest') || desc.includes('retreat') || features.includes('mountain') || features.includes('sauna') || features.includes('ski');
+                    }
+                    return false;
+                }
+
+                const filtered = props.filter(p => matchesFilter(p, filterVal));
+
+                // On homepage, limit the count if 'all', otherwise show all matching ones
+                const limit = filterVal === 'all' ? 3 : filtered.length;
+                const toShow = filtered.slice(0, limit);
+
+                if (toShow.length === 0) {
+                    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">No properties found in this collection.</p>';
+                    return;
+                }
+
+                toShow.forEach((prop, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'property-card card-hidden';
+
+                    const rawImg = prop.image && prop.image.trim() !== '' ? prop.image : 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800';
+                    const imageUrl = typeof getCorrectImagePath === 'function' ? getCorrectImagePath(rawImg) : rawImg;
+
+                    card.innerHTML = `
+                        <div class="property-image-container" style="position: relative; overflow: hidden; height: 260px; background: #eee;">
+                            <img src="${imageUrl}" 
+                                 alt="${prop.name}" 
+                                 class="property-thumb" 
+                                 style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;"
+                                 onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800';">
+                            <div class="status-badge" style="position: absolute; top: 15px; right: 15px; background: ${prop.status === 'Available' ? '#ecfdf5' : '#fef2f2'}; color: ${prop.status === 'Available' ? '#059669' : '#ef4444'}; padding: 6px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">${prop.status}</div>
+                            <button class="favorite-btn" data-id="${prop.id}" style="position: absolute; top: 15px; left: 15px; width: 36px; height: 36px; border-radius: 50%; border: none; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; z-index: 10;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="heart-icon">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="property-content">
+                            <div style="margin-bottom: 8px;">
+                                <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">${prop.location}</span>
+                            </div>
+                            <h3 style="margin-bottom: 12px; font-size: 1.2rem; font-weight: 700;">${prop.name}</h3>
+                            <p style="font-weight: 800; color: var(--text-main); font-size: 1.1rem; letter-spacing: -0.5px;">$${Number(prop.price).toLocaleString()}</p>
+                        </div>
+                    `;
+                    card.onclick = () => window.location.href = `public/pages/property.html?id=${prop.id}`;
+                    grid.appendChild(card);
+
+                    // Trigger animation frame for fade-in effect
+                    setTimeout(() => {
+                        card.classList.remove('card-hidden');
+                        card.classList.add('card-visible');
+                    }, index * 80);
+
+                    // Favorite Toggle Logic
+                    const favBtn = card.querySelector('.favorite-btn');
+                    const heartIcon = favBtn.querySelector('.heart-icon');
+                    const currentUser = typeof getAuthUser === 'function' ? getAuthUser() : null;
+
+                    if (currentUser && typeof AdminState !== 'undefined') {
+                        const savedItems = AdminState.getSavedProperties(currentUser.email);
+                        if (savedItems.includes(prop.id)) {
+                            heartIcon.setAttribute('fill', '#ef4444');
+                            heartIcon.setAttribute('stroke', '#ef4444');
+                        }
+                    }
+
+                    favBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (!currentUser) {
+                            if (typeof UIUtils !== 'undefined') UIUtils.showToast('Please login to save properties', 'error');
+                            else alert('Please login to save properties');
+                            return;
+                        }
+                        const isAdded = AdminState.toggleSavedProperty(currentUser.email, prop.id);
+                        if (isAdded) {
+                            heartIcon.setAttribute('fill', '#ef4444');
+                            heartIcon.setAttribute('stroke', '#ef4444');
+                            if (typeof UIUtils !== 'undefined') UIUtils.showToast('Added to favorites');
+                        } else {
+                            heartIcon.setAttribute('fill', 'none');
+                            heartIcon.setAttribute('stroke', 'currentColor');
+                            if (typeof UIUtils !== 'undefined') UIUtils.showToast('Removed from favorites', 'info');
+                        }
+                    });
+                });
+            }
+
+            // Bind tab click events
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    renderFilteredProperties(tab.getAttribute('data-filter'));
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

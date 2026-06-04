@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Agency | Starline</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logos/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/logos/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .luxury-hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1512914890251-2f96a9b0bbe2?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            background-color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 5%;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .category-card {
+            background: var(--white);
+            padding: 50px 30px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            border: 1px solid var(--border-soft);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+            counter-reset: process;
+        }
+
+        .step-item {
+            position: relative;
+            text-align: center;
+        }
+
+        .step-item::before {
+            counter-increment: process;
+            content: "0" counter(process);
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--bg-soft);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        .newsletter-box {
+            background: var(--text-main);
+            color: var(--white);
+            padding: 80px 40px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 40px auto 0;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border-radius: var(--border-radius-sm);
+            border: none;
+            outline: none;
+        }
+
+        @media (max-width: 992px) {
+
+            .category-grid,
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .category-grid,
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        .spotlight-section {
+            background: var(--bg-soft);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 700px;
+            align-items: center;
+        }
+
+        .spotlight-content {
+            padding: 100px 10%;
+        }
+
+        .spotlight-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 992px) {
+            .spotlight-section {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .spotlight-image {
+                height: 500px;
+            }
+        }
+
+        .vision-section {
+            position: relative;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 10%;
+            overflow: hidden;
+            background: var(--text-main);
+            background-color: #0f172a;
+            /* Fallback high-end navy */
+        }
+
+        .vision-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            filter: grayscale(30%);
+        }
+
+        .vision-card {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 60px;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .vision-section {
+                justify-content: center;
+                padding: 0 5%;
+            }
+
+            .vision-card {
+                padding: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <!-- Gradient accent line at top -->
+        <div class="header-accent-bar"></div>
+        <div class="nav-container">
+            <!-- Row 1: Logo | Nav (centered) | Actions -->
+            <div class="nav-top-row">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        <span>Starline</span>
+                    </a>
+                </div>
+                <!-- Centered Nav Links -->
+                <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="public/pages/home.html">Home 2</a>
+                    <a href="signature.html" class="nav-active">Curated Estates</a>
+                    <a href="public/pages/listings.html">Listings</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="public/pages/about.html">About</a>
+                    <a href="public/pages/contact.html">Contact</a>
+                </nav>
+                <!-- Right: Account + Hamburger -->
+                <div class="nav-actions">
+                    <a href="login.html" id="dashboard-link" class="nav-cta" title="Account" style="width: 40px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Row 2: Search Bar -->
+            <div class="nav-search-row">
+                <div class="nav-search-glass">
+                    <input type="text" id="nav-search-query" placeholder="City, neighborhood, or property name...">
+                    <span class="nav-search-sep"></span>
+                    <input type="number" id="nav-search-investment" placeholder="Budget (USD)">
+                    <span class="nav-search-sep"></span>
+                    <select id="nav-search-type">
+                        <option value="buy">Purchase</option>
+                        <option value="rent">Lease</option>
+                    </select>
+                    <button class="nav-search-btn" id="nav-search-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Discover
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="luxury-hero">
+            <div style="max-width: 900px;">
+                <h1
+                    style="font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 24px; letter-spacing: -3px; line-height: 1;">
+                    Living, Curated.</h1>
+                <p style="font-size: 1.5rem; margin-bottom: 40px; opacity: 0.9; font-weight: 500;">Exclusive
+                    representation for the world's most architectural and historically significant homes.</p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a href="public/pages/listings.html" class="nav-cta"
+                        style="margin: 0; padding: 20px 50px; font-size: 1rem; background: var(--white); color: var(--text-main) !important;">Explore
+                        Properties</a>
+                    <a href="public/pages/contact.html" class="btn-outline"
+                        style="border-color: var(--white); color: var(--white); padding: 20px 50px; backdrop-filter: blur(5px);">Schedule
+                        Visit</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architectural Spotlight -->
+        <section class="spotlight-section">
+            <div class="spotlight-content">
+                <span
+                    style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700; color: var(--accent); margin-bottom: 20px; display: block;">Architectural
+                    Spotlight</span>
+                <h2
+                    style="font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: -2px; line-height: 1.1; margin-bottom: 30px;">
+                    The Monolith House: A Study in Light & Form.</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 40px;">Designed
+                    by world-renowned architect Elena Rossi, this brutalist masterpiece in the hills of Marbella
+                    redefines contemporary living. Featuring seamless indoor-outdoor transitions and a 40-meter
+                    cantilevered pool.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
+                    <div>
+                        <h4 style="margin-bottom: 8px;">12,500 SQFT</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Living Space</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 8px;">MARBELLA, ES</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Location</p>
+                    </div>
+                </div>
+                <a href="public/pages/property.html" class="nav-cta" style="margin: 0; display: inline-block;">View Case
+                    Study</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?auto=format&fit=crop&q=80&w=1600"
+                alt="Masterpiece House" class="spotlight-image">
+        </section>
+
+        <!-- Featured Properties -->
+        <section class="section-padding">
+            <div class="container">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; flex-wrap: wrap; gap: 30px;">
+                    <div>
+                        <h2 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px;">
+                            Curated Collection</h2>
+                        <p style="color: var(--text-muted); font-size: 1.1rem;">A selection of our most prestigious
+                            currently available estates.</p>
+                    </div>
+                    <a href="public/pages/listings.html" class="btn-outline">View All Listings</a>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px;">
+                    <!-- Property 1 -->
+                    <div onclick="location.href='public/pages/property.html?id=1'"
+                        style="background: var(--white); border-radius: var(--border-radius-lg); border: 1px solid var(--border-soft); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer;">
+                        <div style="position: relative; height: 250px; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=800"
+                                alt="Villa" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div
+                                style="position: absolute; top: 20px; right: 20px; background: var(--white); padding: 8px 16px; border-radius: var(--border-radius-sm); font-weight: 700; font-size: 0.8rem; box-shadow: var(--shadow-sm);">
+                                $12,400,000</div>
+                        </div>
+                        <div style="padding: 30px;">
+                            <h3 style="margin-bottom: 10px; font-size: 1.25rem;">The Glass Pavilion</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Beverly Hills,
+                                California Ã¢â‚¬Â¢ 6 Beds Ã¢â‚¬Â¢ 8 Baths</p>
+                            <a href="public/pages/property.html?id=1" class="btn-outline"
+                                style="width: 100%; text-align: center;">View
+                                Details</a>
+                        </div>
+                    </div>
+                    <!-- Property 2 -->
+                    <div onclick="location.href='public/pages/property.html?id=2'"
+                        style="background: var(--white); border-radius: var(--border-radius-lg); border: 1px solid var(--border-soft); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer;">
+                        <div style="position: relative; height: 250px; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=800"
+                                alt="Penthouse" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div
+                                style="position: absolute; top: 20px; right: 20px; background: var(--white); padding: 8px 16px; border-radius: var(--border-radius-sm); font-weight: 700; font-size: 0.8rem; box-shadow: var(--shadow-sm);">
+                                $8,950,000</div>
+                        </div>
+                        <div style="padding: 30px;">
+                            <h3 style="margin-bottom: 10px; font-size: 1.25rem;">Skyline Observatory</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Tribeca, New
+                                York Ã¢â‚¬Â¢ 4 Beds Ã¢â‚¬Â¢ 5 Baths</p>
+                            <a href="public/pages/property.html?id=2" class="btn-outline"
+                                style="width: 100%; text-align: center;">View
+                                Details</a>
+                        </div>
+                    </div>
+                    <!-- Property 3 -->
+                    <div onclick="location.href='public/pages/property.html?id=3'"
+                        style="background: var(--white); border-radius: var(--border-radius-lg); border: 1px solid var(--border-soft); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer;">
+                        <div style="position: relative; height: 250px; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&q=80&w=800"
+                                alt="Estate" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div
+                                style="position: absolute; top: 20px; right: 20px; background: var(--white); padding: 8px 16px; border-radius: var(--border-radius-sm); font-weight: 700; font-size: 0.8rem; box-shadow: var(--shadow-sm);">
+                                $15,200,000</div>
+                        </div>
+                        <div style="padding: 30px;">
+                            <h3 style="margin-bottom: 10px; font-size: 1.25rem;">Ethereal Heights</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Swiss Alps,
+                                Zurich Ã¢â‚¬Â¢ 7 Beds Ã¢â‚¬Â¢ 9 Baths</p>
+                            <a href="public/pages/property.html?id=3" class="btn-outline"
+                                style="width: 100%; text-align: center;">View
+                                Details</a>
+                        </div>
+                    </div>
+                    <!-- Property 4 -->
+                    <div onclick="location.href='public/pages/property.html?id=4'"
+                        style="background: var(--white); border-radius: var(--border-radius-lg); border: 1px solid var(--border-soft); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer;">
+                        <div style="position: relative; height: 250px; overflow: hidden;">
+                            <img src="assets/monolith_estate.png"
+                                alt="Modern" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div
+                                style="position: absolute; top: 20px; right: 20px; background: var(--white); padding: 8px 16px; border-radius: var(--border-radius-sm); font-weight: 700; font-size: 0.8rem; box-shadow: var(--shadow-sm);">
+                                $6,700,000</div>
+                        </div>
+                        <div style="padding: 30px;">
+                            <h3 style="margin-bottom: 10px; font-size: 1.25rem;">Monolith Estate</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Austin, Texas Ã¢â‚¬Â¢
+                                5 Beds Ã¢â‚¬Â¢ 6 Baths</p>
+                            <a href="public/pages/property.html?id=4" class="btn-outline"
+                                style="width: 100%; text-align: center;">View
+                                Details</a>
+                        </div>
+                    </div>
+                    <!-- Property 5 -->
+                    <div onclick="location.href='public/pages/property.html?id=5'"
+                        style="background: var(--white); border-radius: var(--border-radius-lg); border: 1px solid var(--border-soft); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer;">
+                        <div style="position: relative; height: 250px; overflow: hidden;">
+                            <img src="assets/oceanic_serenity.png"
+                                alt="Coast" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div
+                                style="position: absolute; top: 20px; right: 20px; background: var(--white); padding: 8px 16px; border-radius: var(--border-radius-sm); font-weight: 700; font-size: 0.8rem; box-shadow: var(--shadow-sm);">
+                                $21,000,000</div>
+                        </div>
+                        <div style="padding: 30px;">
+                            <h3 style="margin-bottom: 10px; font-size: 1.25rem;">Oceanic Serenity</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Malibu,
+                                California Ã¢â‚¬Â¢ 8 Beds Ã¢â‚¬Â¢ 11 Baths</p>
+                            <a href="public/pages/property.html?id=5" class="btn-outline"
+                                style="width: 100%; text-align: center;">View
+                                Details</a>
+                        </div>
+                    </div>
+                    <!-- Property 6 -->
+                    <div onclick="location.href='public/pages/property.html?id=6'"
+                        style="background: var(--white); border-radius: var(--border-radius-lg); border: 1px solid var(--border-soft); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer;">
+                        <div style="position: relative; height: 250px; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800"
+                                alt="Forest" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div
+                                style="position: absolute; top: 20px; right: 20px; background: var(--white); padding: 8px 16px; border-radius: var(--border-radius-sm); font-weight: 700; font-size: 0.8rem; box-shadow: var(--shadow-sm);">
+                                $4,500,000</div>
+                        </div>
+                        <div style="padding: 30px;">
+                            <h3 style="margin-bottom: 10px; font-size: 1.25rem;">Ironwood Sanctuary</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Aspen, Colorado
+                                Ã¢â‚¬Â¢ 4 Beds Ã¢â‚¬Â¢ 4 Baths</p>
+                            <a href="public/pages/property.html?id=6" class="btn-outline"
+                                style="width: 100%; text-align: center;">View
+                                Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="section-padding" style="background: var(--bg-soft); border-top: 1px solid var(--border-soft);">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 60px;">
+                    <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 16px;">Browse by Lifestyle</h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">Tailored environments for your unique way of
+                        living.</p>
+                </div>
+                <div class="category-grid">
+                    <div class="category-card">
+                        <span class="category-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                                <path d="M9 22v-4h6v4"></path>
+                                <path d="M8 6h.01"></path>
+                                <path d="M16 6h.01"></path>
+                                <path d="M8 10h.01"></path>
+                                <path d="M16 10h.01"></path>
+                                <path d="M8 14h.01"></path>
+                                <path d="M16 14h.01"></path>
+                            </svg>
+                        </span>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px;">Residential</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Modern villas, penthouses, and family
+                            estates for permanent living.</p>
+                    </div>
+                    <div class="category-card">
+                        <span class="category-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                        </span>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px;">Commercial</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">High-tech offices and luxury retail
+                            spaces in prime global districts.</p>
+                    </div>
+                    <div class="category-card">
+                        <span class="category-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </span>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px;">Rentals</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Short-term luxury stays and seasonal
+                            retreats for global travelers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="section-padding" style="border-bottom: 1px solid var(--border-soft);">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 80px;">
+                    <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 16px;">The Starline Journey</h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">A seamless path from digital discovery to
+                        handing over the keys.</p>
+                </div>
+                <div class="process-steps">
+                    <div class="step-item">
+                        <h3 style="margin-bottom: 12px; font-size: 1.1rem;">01 Discovery</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">An immersive consultation to understand
+                            your architectural and lifestyle requirements.</p>
+                    </div>
+                    <div class="step-item">
+                        <h3 style="margin-bottom: 12px; font-size: 1.1rem;">02 Curation</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Hand-picking exclusive, off-market
+                            listings that align with your refined vision.</p>
+                    </div>
+                    <div class="step-item">
+                        <h3 style="margin-bottom: 12px; font-size: 1.1rem;">03 Immersion</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Private, high-touch walkthroughs and
+                            VR-assisted remote viewing for global clients.</p>
+                    </div>
+                    <div class="step-item">
+                        <h3 style="margin-bottom: 12px; font-size: 1.1rem;">04 Handover</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Concierge legal and financial
+                            finalization for a discrete and smooth ownership transition.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Global Vision -->
+        <section class="vision-section">
+            <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&q=80&w=1600"
+                alt="Global Cityscape" class="vision-bg">
+            <div class="vision-card">
+                <h2 style="font-size: 2.5rem; letter-spacing: -2px; margin-bottom: 24px;">Global Perspective. Local
+                    Expertise.</h2>
+                <p style="font-size: 1.1rem; line-height: 1.7; opacity: 0.9; margin-bottom: 30px;">With presence in
+                    London, New York, Hong Kong, and Zurich, Starline provides a seamless gateway to the world's most
+                    significant property markets.</p>
+                <ul
+                    style="list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-weight: 600; font-size: 0.9rem;">
+                    <li>Ã¢â‚¬Â¢ London Office</li>
+                    <li>Ã¢â‚¬Â¢ NYC Private Desk</li>
+                    <li>Ã¢â‚¬Â¢ HK Acquisition</li>
+                    <li>Ã¢â‚¬Â¢ Zurich Wealth Desk</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section-padding" style="background: var(--text-main); color: var(--white);">
+            <div class="container">
+                <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 60px; font-weight: 800;">Client
+                    Perspectives</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                    <div
+                        style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: var(--border-radius-lg); border: 1px solid rgba(255,255,255,0.1);">
+                        <p style="font-style: italic; margin-bottom: 30px; line-height: 1.8; opacity: 0.9;">"The
+                            curation at Starline is unlike anything I've seen. Every property presented was a genuine
+                            architectural contender, not just another listing."</p>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100"
+                                alt="Julian Vance"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                            <div>
+                                <h5 style="margin: 0; font-size: 1rem;">Julian Vance</h5>
+                                <span style="font-size: 0.8rem; opacity: 0.6;">San Francisco, CA</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: var(--border-radius-lg); border: 1px solid rgba(255,255,255,0.1);">
+                        <p style="font-style: italic; margin-bottom: 30px; line-height: 1.8; opacity: 0.9;">"Their
+                            attention to historical detail and architectural significance is why we trust them with our
+                            global property portfolio."</p>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100"
+                                alt="Isabella Chen"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                            <div>
+                                <h5 style="margin: 0; font-size: 1rem;">Isabella Chen</h5>
+                                <span style="font-size: 0.8rem; opacity: 0.6;">London, UK</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: var(--border-radius-lg); border: 1px solid rgba(255,255,255,0.1);">
+                        <p style="font-style: italic; margin-bottom: 30px; line-height: 1.8; opacity: 0.9;">"Discrete,
+                            professional, and incredibly efficient. Starline understands the value of time for busy
+                            professionals."</p>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100"
+                                alt="Robert Miller"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                            <div>
+                                <h5 style="margin: 0; font-size: 1rem;">Robert Miller</h5>
+                                <span style="font-size: 0.8rem; opacity: 0.6;">New York, NY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="section-padding" style="background: var(--bg-soft);">
+            <div class="newsletter-box" style="box-shadow: var(--shadow-xl);">
+                <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -1px;">Exclusivity
+                    in your inbox.</h2>
+                <p style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 10px;">Get early access to off-market
+                    properties and global market insights.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your professional email" required
+                        style="background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.2); padding: 18px 24px;">
+                    <button type="submit" class="nav-cta" style="margin: 0; padding: 18px 40px;">Subscribe</button>
+                </form>
+                <p style="font-size: 0.75rem; opacity: 0.5; margin-top: 30px;">We respect your privacy. Unsubscribe at
+                    any time.</p>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="section-padding" style="text-align: center;">
+            <div class="container">
+                <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -2px;">Ready to find
+                    your legacy?</h2>
+                <p style="color: var(--text-muted); font-size: 1.25rem; margin-bottom: 40px;">Connect with an advisor
+                    today or browse our full estate collection.</p>
+                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                    <a href="public/pages/contact.html" class="nav-cta" style="margin: 0; padding: 20px 60px;">Contact
+                        Private
+                        Office</a>
+                    <a href="public/pages/listings.html" class="btn-outline" style="padding: 20px 60px;">View Full
+                        Collection</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo">
+                    <a href="index.html"
+                        style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        <span style="font-weight: 800; letter-spacing: -0.5px;">Starline</span>
+                    </a>
+                </div>
+                <p style="margin-top: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                    Redefining luxury real estate through architectural excellence and radical honesty since 2012.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="public/pages/home.html">Home 2</a></li>
+                    <li><a href="public/pages/listings.html">Listings</a></li>
+                    <li><a href="signature.html">Curated Estates</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="public/pages/contact.html">Help Center</a></li>
+                    <li><a href="public/pages/contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-newsletter">
+                <h4>Join Our Journal</h4>
+                <p style="margin-bottom: 20px;">Dispatches from the intersection of architecture, wealth, and design.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email Address" required
+                        style="width: 100%; padding: 15px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: var(--border-radius-sm); margin-bottom: 15px; outline: none; font-size: 0.9rem;">
+                    <button type="submit" class="nav-cta" style="width: 100%; margin: 0;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 MrCodersHub. All rights reserved.</div>
+            <div style="display: flex; gap: 30px;">
+                <a href="privacy.html" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+                <a href="terms.html" style="color: inherit; text-decoration: none;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="src/js/admin-state.js"></script>
+    <script src="src/js/ui-utils.js"></script>
+    <script src="src/js/listings.js"></script>
+    <script src="src/js/search.js"></script>
+</body>
+
+</html>

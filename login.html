@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Starline</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logos/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --glass-bg: rgba(255,255,255,0.07);
+            --glass-border: rgba(255,255,255,0.15);
+            --glass-shadow: 0 32px 80px rgba(0,0,0,0.5);
+            --input-bg: rgba(255,255,255,0.08);
+            --input-border: rgba(255,255,255,0.18);
+            --input-focus: rgba(255,255,255,0.35);
+            --text-main: #ffffff;
+            --text-muted: rgba(255,255,255,0.55);
+            --accent: #e2c98a;
+            --accent-glow: rgba(226,201,138,0.25);
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Hero Background ── */
+        .auth-bg {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            background:
+                linear-gradient(
+                    160deg,
+                    rgba(10,10,20,0.82) 0%,
+                    rgba(5,10,25,0.72) 60%,
+                    rgba(20,10,5,0.85) 100%
+                ),
+                url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=90&w=1400') center/cover no-repeat;
+        }
+
+        /* Ambient noise grain overlay */
+        .auth-bg::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Decorative radial glow blobs */
+        .auth-bg::after {
+            content: '';
+            position: fixed;
+            top: -20%;
+            right: -15%;
+            width: 60vw;
+            height: 60vw;
+            max-width: 500px;
+            max-height: 500px;
+            background: radial-gradient(circle, rgba(226,201,138,0.12) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── Auth Card ── */
+        .auth-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 420px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 44px 36px 40px;
+            box-shadow: var(--glass-shadow);
+            animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(28px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ── Logo ── */
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            margin-bottom: 36px;
+        }
+
+        .auth-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px var(--accent-glow);
+        }
+
+        .auth-logo-text {
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-main);
+        }
+
+        /* ── Heading ── */
+        .auth-heading {
+            font-size: 2.2rem;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .auth-sub {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            line-height: 1.6;
+        }
+
+        /* ── Error Message ── */
+        #error-message {
+            display: none;
+            background: rgba(255,100,100,0.12);
+            color: #ff8a8a;
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,100,100,0.25);
+        }
+
+        /* ── Input Fields ── */
+        .field-group {
+            margin-bottom: 18px;
+        }
+
+        .field-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .field-input-wrap {
+            position: relative;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 15px 18px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 14px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+            -webkit-text-fill-color: var(--text-main);
+        }
+
+        .auth-input::placeholder {
+            color: rgba(255,255,255,0.28);
+        }
+
+        .auth-input:focus {
+            background: var(--input-focus);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 0 0 3px rgba(226,201,138,0.12);
+        }
+
+        /* Password toggle */
+        .auth-input.has-toggle {
+            padding-right: 52px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+            padding: 4px;
+        }
+
+        .toggle-password:hover { color: var(--text-main); }
+
+        /* ── Forgot Link ── */
+        .forgot-link {
+            display: block;
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: 8px;
+            margin-bottom: 28px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .forgot-link:hover { opacity: 0.8; }
+
+        /* ── Sign In Button ── */
+        .signin-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: #0a0a14;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: transform 0.18s, box-shadow 0.18s, opacity 0.18s;
+            box-shadow: 0 8px 24px var(--accent-glow);
+        }
+
+        .signin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 36px rgba(226,201,138,0.35);
+        }
+
+        .signin-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ── Divider ── */
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 28px 0;
+        }
+
+        .auth-divider hr {
+            flex: 1;
+            border: none;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .auth-divider span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            white-space: nowrap;
+        }
+
+        /* ── Social Buttons ── */
+        .social-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 13px 10px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, transform 0.18s;
+        }
+
+        .social-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.28);
+            transform: translateY(-1px);
+        }
+
+        /* ── Signup Link ── */
+        .signup-link {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .signup-link a {
+            color: var(--accent);
+            font-weight: 700;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .signup-link a:hover { opacity: 0.8; }
+
+        /* ── Back link ── */
+        .back-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: color 0.2s;
+            backdrop-filter: blur(8px);
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 8px 14px;
+            border-radius: 50px;
+        }
+
+        .back-home:hover { color: rgba(255,255,255,0.95); }
+
+        /* ── Desktop: side-by-side ── */
+        @media (min-width: 900px) {
+            .auth-bg {
+                align-items: stretch;
+                padding: 0;
+            }
+
+            .auth-bg::after {
+                top: -10%;
+                right: 40%;
+            }
+
+            .desktop-split {
+                display: flex;
+                width: 100%;
+                min-height: 100vh;
+            }
+
+            .desktop-visual {
+                flex: 1.2;
+                background:
+                    linear-gradient(160deg, rgba(10,10,20,0.5) 0%, rgba(5,10,25,0.35) 100%),
+                    url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=90&w=1400') center/cover no-repeat;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 60px;
+            }
+
+            .desktop-visual-tagline {
+                color: white;
+                font-size: 2.8rem;
+                font-weight: 900;
+                letter-spacing: -2px;
+                line-height: 1.1;
+                max-width: 420px;
+                text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+                margin-bottom: 16px;
+            }
+
+            .desktop-visual-sub {
+                color: rgba(255,255,255,0.6);
+                font-size: 0.95rem;
+                max-width: 340px;
+                line-height: 1.6;
+            }
+
+            .desktop-form-panel {
+                flex: 1;
+                background: #0c0f1a;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 60px 48px;
+            }
+
+            .auth-card {
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,255,255,0.08);
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 899px) {
+            .desktop-visual { display: none; }
+            .desktop-split { display: contents; }
+            .desktop-form-panel { display: contents; }
+        }
+
+        /* ── Input autofill fix ── */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 1000px rgba(30,35,60,0.95) inset !important;
+            -webkit-text-fill-color: #ffffff !important;
+            border-color: rgba(255,255,255,0.3) !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="index.html" class="back-home">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        Home
+    </a>
+
+    <div class="auth-bg">
+        <div class="desktop-split">
+            <!-- Desktop left panel -->
+            <div class="desktop-visual">
+                <div class="desktop-visual-tagline">Live where<br>legends reside.</div>
+                <p class="desktop-visual-sub">Access the world's most curated collection of ultra-luxury real estate.</p>
+            </div>
+
+            <!-- Form panel -->
+            <div class="desktop-form-panel">
+                <div class="auth-card">
+
+                    <!-- Logo -->
+                    <a href="index.html" class="auth-logo">
+                        <div class="auth-logo-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a14" stroke="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="#0a0a14"></path>
+                            </svg>
+                        </div>
+                        <span class="auth-logo-text">Starline</span>
+                    </a>
+
+                    <h1 class="auth-heading">Welcome<br>Back.</h1>
+                    <p class="auth-sub">Professional access to the Starline collection.</p>
+
+                    <div id="error-message"></div>
+
+                    <form id="login-form">
+                        <!-- Email -->
+                        <div class="field-group">
+                            <label class="field-label" for="email">Email Address</label>
+                            <div class="field-input-wrap">
+                                <input type="email" id="email" placeholder="name@company.com" class="auth-input" required>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="field-group">
+                            <label class="field-label" for="password">Password</label>
+                            <div class="field-input-wrap">
+                                <input type="password" id="password" placeholder="••••••••" class="auth-input has-toggle" required>
+                                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')" aria-label="Toggle password visibility">
+                                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                        <circle cx="12" cy="12" r="3" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+
+                        <button type="submit" class="signin-btn" id="signin-btn">Sign In</button>
+
+                        <!-- Divider -->
+                        <div class="auth-divider">
+                            <hr><span>or continue with</span><hr>
+                        </div>
+
+                        <!-- Social -->
+                        <div class="social-row">
+                            <button type="button" class="social-btn" id="apple-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.05 20.28c-.98.95-2.05 1.74-3.14 1.72-1.09-.03-1.42-.69-2.73-.69-1.31 0-1.7.67-2.71.7-1.07.03-2.2-.84-3.23-1.87-2.11-2.09-3.7-5.91-1.63-9.5 1.03-1.78 2.86-2.9 4.88-2.93 1.54-.03 3 .89 3.91.89.92 0 2.65-1.13 4.54-.92 1.78.07 3.14.73 3.86 1.78-3.41 1.76-2.85 6.33.6 8.02-.75 1.8-1.55 3.59-3.33 5.3M12.03 7.25c-.02-2.14 1.72-4 3.79-4.14.23 2.49-2.24 4.5-3.79 4.14"/>
+                                </svg>
+                                Apple
+                            </button>
+                            <button type="button" class="social-btn" id="google-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                                </svg>
+                                Google
+                            </button>
+                        </div>
+
+                        <!-- Signup -->
+                        <p class="signup-link">
+                            New to Starline?&nbsp;
+                            <a href="auth/signup.html">Create Account</a>
+                        </p>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/js/admin-state.js"></script>
+    <script src="src/js/auth.js"></script>
+    <script>
+        function togglePasswordVisibility(id) {
+            const input = document.getElementById(id);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+
+</body>
+
+</html>

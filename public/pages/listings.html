@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Properties | Starline</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../src/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../assets/logos/favicon.svg">
+</head>
+
+<body>
+
+    <header>
+        <!-- Gradient accent line at top -->
+        <div class="header-accent-bar"></div>
+        <div class="nav-container">
+            <!-- Row 1: Logo | Nav (centered) | Actions -->
+            <div class="nav-top-row">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="../../index.html">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        <span>Starline</span>
+                    </a>
+                </div>
+                <!-- Centered Nav Links -->
+                <nav class="nav-links">
+                    <a href="../../index.html">Home</a>
+                    <a href="home.html">Home 2</a>
+                    <a href="../../signature.html">Curated Estates</a>
+                    <a href="listings.html" class="nav-active">Listings</a>
+                    <a href="../../blog.html">Blog</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <!-- Right: Account + Hamburger -->
+                <div class="nav-actions">
+                    <a href="../../login.html" id="dashboard-link" class="nav-cta" title="Account" style="width: 40px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Row 2: Search Bar -->
+            <div class="nav-search-row">
+                <div class="nav-search-glass">
+                    <input type="text" id="nav-search-query" placeholder="City, neighborhood, or property name...">
+                    <span class="nav-search-sep"></span>
+                    <input type="number" id="nav-search-investment" placeholder="Budget (USD)">
+                    <span class="nav-search-sep"></span>
+                    <select id="nav-search-type">
+                        <option value="buy">Purchase</option>
+                        <option value="rent">Lease</option>
+                    </select>
+                    <button class="nav-search-btn" id="nav-search-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Discover
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="section-padding" style="background: var(--bg-main);">
+        <div style="margin-bottom: 60px;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 12px; letter-spacing: -1px;">Our Properties</h1>
+            <p style="color: var(--text-muted);">Explore our curated collection of international luxury real estate.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 60px;">
+            <!-- Sidebar Filter -->
+            <aside class="filter-sidebar">
+                <div
+                    style="position: sticky; top: 120px; background: var(--bg-alt); padding: 32px; border-radius: var(--border-radius-lg); border: 1px solid var(--border-soft); box-shadow: var(--shadow-sm);">
+                    <h3 style="margin-bottom: 24px; font-size: 1rem;">Filter Search</h3>
+
+                    <div style="margin-bottom: 32px;">
+                        <label
+                            style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; color: var(--text-muted);">Location</label>
+                        <select
+                            style="width: 100%; padding: 12px; border: 1px solid var(--border-soft); border-radius: var(--border-radius-sm); outline: none; background: var(--off-white);">
+                            <option>All Locations</option>
+                            <option>California</option>
+                            <option>New York</option>
+                            <option>Miami</option>
+                            <option>Chicago</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 32px;">
+                        <label
+                            style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; color: var(--text-muted);">Property
+                            Type</label>
+                        <select
+                            style="width: 100%; padding: 12px; border: 1px solid var(--border-soft); border-radius: var(--border-radius-sm); outline: none; background: var(--off-white);">
+                            <option>All Types</option>
+                            <option>Villa</option>
+                            <option>Apartment</option>
+                            <option>Penthouse</option>
+                            <option>House</option>
+                        </select>
+                    </div>
+
+
+
+                    <button class="btn-outline"
+                        style="width: 100%; background: var(--white); color: #000; border: none;">Apply
+                        Filters</button>
+                </div>
+            </aside>
+
+            <!-- Property Grid -->
+            <div>
+                <div class="property-grid">
+                    <!-- Injected via listings.js -->
+                </div>
+
+                <div style="margin-top: 80px; text-align: center;">
+                    <button class="btn-outline" style="border-color: var(--border-strong);">Load More
+                        Properties</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 24px;">
+                    <a href="../../index.html"
+                        style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        <span style="font-weight: 800; letter-spacing: -0.5px;">Starline</span>
+                    </a>
+                </div>
+                <p>The world's first minimalist real estate platform for high-end international living. Experience
+                    transparency, design, and luxury. Built by MrCodersHub.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="home.html">Home 2</a></li>
+                    <li><a href="listings.html">Listings</a></li>
+                    <li><a href="../../signature.html">Curated Estates</a></li>
+                    <li><a href="../../blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="../../privacy.html">Privacy Policy</a></li>
+                    <li><a href="../../terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-newsletter">
+                <h4>Join Our Journal</h4>
+                <p style="margin-bottom: 20px;">Dispatches from the intersection of architecture, wealth, and design.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email Address" required
+                        style="width: 100%; padding: 15px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: var(--border-radius-sm); margin-bottom: 15px; outline: none; font-size: 0.9rem;">
+                    <button type="submit" class="nav-cta" style="width: 100%; margin: 0;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 MrCodersHub. All rights reserved.</div>
+            <div style="display: flex; gap: 20px;">
+                <a href="../../privacy.html" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+                <a href="../../terms.html" style="color: inherit; text-decoration: none;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../src/js/admin-state.js"></script>
+    <script src="../../src/js/ui-utils.js"></script>
+    <script src="../../src/js/listings.js"></script>
+    <script src="../../src/js/search.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initUserHeader === 'function') initUserHeader();
+        });
+    </script>
+</body>
+
+</html>

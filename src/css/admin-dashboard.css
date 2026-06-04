@@ -1,0 +1,412 @@
+/* 
+  Starline Admin Dashboard Style System
+  Theme: Ultra-Premium / Luxury Minimalist
+*/
+
+:root {
+    --admin-sidebar-width: 250px;
+    --admin-sidebar-collapsed: 80px;
+    --admin-bg: #f8fafc;
+    --admin-card: #ffffff;
+    --admin-accent: #000000;
+    --admin-text-main: #0f172a;
+    --admin-text-muted: #64748b;
+    --admin-border: #e2e8f0;
+    --admin-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+    --admin-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--admin-bg);
+    color: var(--admin-text-main);
+    overflow-x: hidden;
+}
+
+/* Layout Structure */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styling */
+.admin-sidebar {
+    width: var(--admin-sidebar-width);
+    background: #000;
+    color: #fff;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+.sidebar-logo {
+    padding: 0 30px;
+    margin-bottom: 50px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.sidebar-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 15px;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 15px;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.menu-link svg {
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+}
+
+.menu-link:hover,
+.menu-link.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.menu-link.active {
+    background: #fff;
+    color: #000;
+}
+
+.menu-link.active svg {
+    color: #000;
+}
+
+.sidebar-footer {
+    padding: 20px 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Content Area */
+.admin-content {
+    flex: 1;
+    margin-left: var(--admin-sidebar-width);
+    padding: 40px 50px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Page Headers */
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.header-title h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    margin-bottom: 8px;
+}
+
+.header-title p {
+    color: var(--admin-text-muted);
+}
+
+/* Stat Cards */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: var(--admin-card);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid var(--admin-border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--admin-shadow-lg);
+}
+
+.stat-card h4 {
+    color: var(--admin-text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.stat-card .value {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+/* Tables */
+.table-container {
+    background: var(--admin-card);
+    border-radius: 20px;
+    border: 1px solid var(--admin-border);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 18px 25px;
+    background: #f8fafc;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--admin-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 18px 25px;
+    border-top: 1px solid var(--admin-border);
+    font-size: 0.95rem;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-available {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.status-sold {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.status-new {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+/* ─── Responsive: Tablet (icon-only sidebar) ─────────────────── */
+@media (max-width: 1024px) {
+    .admin-sidebar {
+        width: var(--admin-sidebar-collapsed);
+    }
+
+    .sidebar-logo {
+        padding: 0;
+        text-align: center;
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+
+    .menu-link {
+        justify-content: center;
+        padding: 15px;
+        gap: 0;
+    }
+
+    .menu-link span {
+        display: none;
+    }
+
+    .admin-content {
+        margin-left: var(--admin-sidebar-collapsed);
+        padding: 30px;
+    }
+
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ─── Responsive: Mobile – bottom nav bar ────────────────────── */
+@media (max-width: 640px) {
+    .admin-sidebar {
+        width: 100%;
+        height: 62px;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        flex-direction: row;
+        padding: 0;
+        z-index: 1100;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar-logo {
+        display: none;
+    }
+
+    .sidebar-menu {
+        flex-direction: row;
+        flex: 1;
+        gap: 0;
+        padding: 0;
+        align-items: stretch;
+        justify-content: space-around;
+    }
+
+    .sidebar-footer {
+        border-top: none;
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .menu-link {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 6px 6px;
+        border-radius: 0;
+        gap: 4px;
+        flex: 1;
+        font-size: 0.58rem;
+        letter-spacing: 0.3px;
+    }
+
+    .menu-link span {
+        display: block;
+        font-size: 0.58rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        white-space: nowrap;
+        color: inherit;
+    }
+
+    .menu-link svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .menu-link.active {
+        background: transparent;
+        color: #fff;
+        border-top: 2px solid #fff;
+    }
+
+    .menu-link:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .admin-content {
+        margin-left: 0;
+        padding: 24px 16px 80px;
+        width: 100%;
+    }
+
+    .content-header {
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 24px;
+    }
+
+    .header-title h1 {
+        font-size: 1.6rem;
+        letter-spacing: -0.8px;
+    }
+
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-bottom: 24px;
+    }
+
+    .stat-card {
+        padding: 20px 16px;
+        border-radius: 14px;
+    }
+
+    .stat-card .value {
+        font-size: 1.6rem;
+    }
+
+    .admin-content > div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+
+    th, td {
+        padding: 12px 14px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ─── 360px fine-tuning ────────────────────────────────────── */
+@media (max-width: 400px) {
+    .admin-content {
+        padding: 18px 12px 80px;
+    }
+
+    .stats-container {
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 16px 12px;
+    }
+
+    .stat-card h4 {
+        font-size: 0.75rem;
+    }
+
+    .stat-card .value {
+        font-size: 1.4rem;
+    }
+
+    .header-title h1 {
+        font-size: 1.35rem;
+    }
+
+    .menu-link span {
+        font-size: 0.5rem;
+        letter-spacing: 0;
+    }
+
+    .menu-link svg {
+        width: 18px;
+        height: 18px;
+    }
+}

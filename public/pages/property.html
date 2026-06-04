@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details | Starline</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../src/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../assets/logos/favicon.svg">
+    <style>
+        /* Ã¢â€â‚¬Ã¢â€â‚¬ Gallery Grid Ã¢â€â‚¬Ã¢â€â‚¬ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: repeat(2, 300px);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .gallery-main {
+            grid-row: span 2;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--border-radius-md);
+        }
+
+        /* Ã¢â€â‚¬Ã¢â€â‚¬ Property Layout Ã¢â€â‚¬Ã¢â€â‚¬ */
+        .property-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 80px;
+        }
+
+        /* Ã¢â€â‚¬Ã¢â€â‚¬ Property Header (title + price row) Ã¢â€â‚¬Ã¢â€â‚¬ */
+        .property-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .property-header-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            line-height: 1.15;
+        }
+
+        .property-header-price {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .property-header-price .price-value {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .property-header-price .price-mortgage {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        /* Ã¢â€â‚¬Ã¢â€â‚¬ Amenities Ã¢â€â‚¬Ã¢â€â‚¬ */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Ã¢â€â‚¬Ã¢â€â‚¬ Inquiry Card Ã¢â€â‚¬Ã¢â€â‚¬ */
+        .inquiry-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 120px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-sm);
+            outline: none;
+            font-family: inherit;
+        }
+
+        /* Ã¢â€â‚¬Ã¢â€â‚¬ Mobile: 768px Ã¢â€â‚¬Ã¢â€â‚¬ */
+        @media (max-width: 768px) {
+            .property-header-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                margin-bottom: 28px;
+            }
+
+            .property-header-price {
+                text-align: left;
+            }
+
+            .property-header-title h1 {
+                font-size: 1.8rem;
+            }
+
+            .property-header-price .price-value {
+                font-size: 1.6rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: 280px 180px 180px;
+            }
+
+            .gallery-main {
+                grid-row: span 1;
+            }
+
+            .property-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .inquiry-card {
+                position: static;
+                padding: 28px 20px;
+            }
+        }
+
+        /* Ã¢â€â‚¬Ã¢â€â‚¬ Mobile: 480px Ã¢â€â‚¬Ã¢â€â‚¬ */
+        @media (max-width: 480px) {
+            .property-header-title h1 {
+                font-size: 1.5rem;
+            }
+
+            .property-header-price .price-value {
+                font-size: 1.4rem;
+            }
+
+            .gallery-grid {
+                grid-template-rows: 240px auto auto;
+            }
+
+            .gallery-img {
+                height: 200px;
+            }
+
+            .amenities-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .inquiry-card {
+                padding: 20px 16px;
+                border-radius: 12px;
+            }
+        }
+
+        /* Ã¢â€â‚¬Ã¢â€â‚¬ Mobile: 360px Ã¢â€â‚¬Ã¢â€â‚¬ */
+        @media (max-width: 400px) {
+            .property-header-title h1 {
+                font-size: 1.3rem;
+                letter-spacing: -0.5px;
+            }
+
+            .property-header-price .price-value {
+                font-size: 1.3rem;
+            }
+
+            .property-header-price .price-mortgage {
+                font-size: 0.72rem;
+            }
+
+            .gallery-grid {
+                grid-template-rows: 220px;
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            /* Hide secondary images at 360px Ã¢â‚¬â€œ show only main */
+            .gallery-grid > div:not(.gallery-main) {
+                display: none;
+            }
+
+            .amenities-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin: 24px 0;
+            }
+
+            .amenity-item {
+                font-size: 0.82rem;
+            }
+        }
+    </style>
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+    <style>
+        /* Leaflet map container */
+        #property-map {
+            width: 100%;
+            height: 400px;
+            position: relative;     /* required by Leaflet */
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border);
+            z-index: 1;
+        }
+        /* clip corners without overflow:hidden (which breaks tile rendering) */
+        #property-map .leaflet-container {
+            border-radius: var(--border-radius-lg);
+        }
+
+        @media (max-width: 768px) {
+            #property-map { height: 280px; }
+        }
+
+        @media (max-width: 480px) {
+            #property-map { height: 220px; }
+        }
+
+        /* Custom Leaflet marker */
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            font-family: 'Inter', sans-serif;
+            padding: 0;
+        }
+
+        .leaflet-popup-content {
+            margin: 16px 20px;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .map-popup-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            color: #0f172a;
+        }
+
+        .map-popup-location {
+            color: #64748b;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+        }
+
+        .map-popup-price {
+            font-weight: 800;
+            color: #0f172a;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <!-- Gradient accent line at top -->
+        <div class="header-accent-bar"></div>
+        <div class="nav-container">
+            <!-- Row 1: Logo | Nav (centered) | Actions -->
+            <div class="nav-top-row">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="../../index.html">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        <span>Starline</span>
+                    </a>
+                </div>
+                <!-- Centered Nav Links -->
+                <nav class="nav-links">
+                    <a href="../../index.html">Home</a>
+                    <a href="home.html">Home 2</a>
+                    <a href="../../signature.html">Curated Estates</a>
+                    <a href="listings.html">Listings</a>
+                    <a href="../../blog.html">Blog</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <!-- Right: Account + Hamburger -->
+                <div class="nav-actions">
+                    <a href="../../login.html" id="dashboard-link" class="nav-cta" title="Account" style="width: 40px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Row 2: Search Bar -->
+            <div class="nav-search-row">
+                <div class="nav-search-glass">
+                    <input type="text" id="nav-search-query" placeholder="City, neighborhood, or property name...">
+                    <span class="nav-search-sep"></span>
+                    <input type="number" id="nav-search-investment" placeholder="Budget (USD)">
+                    <span class="nav-search-sep"></span>
+                    <select id="nav-search-type">
+                        <option value="buy">Purchase</option>
+                        <option value="rent">Lease</option>
+                    </select>
+                    <button class="nav-search-btn" id="nav-search-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Discover
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="section-padding">
+        <!-- Property Header: responsive title + price -->
+        <div class="property-header-row">
+            <div class="property-header-title">
+                <h1 id="prop-title">The Glass House</h1>
+                <p style="color: var(--text-muted);" id="prop-location">401 Luxury Blvd, Malibu, CA 90265</p>
+            </div>
+            <div class="property-header-price">
+                <div class="price-value" id="prop-price">$4,500,000</div>
+                <p class="price-mortgage" id="prop-mortgage">EST. MORTGAGE $22,400/MO</p>
+            </div>
+        </div>
+
+        <!-- Gallery -->
+        <div class="gallery-grid">
+            <div class="gallery-main">
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1200" alt="Main"
+                    class="gallery-img">
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800" alt="Room"
+                    class="gallery-img">
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=800" alt="Pool"
+                    class="gallery-img">
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="property-layout">
+            <div>
+                <h2 style="margin-bottom: 24px;">About this property</h2>
+                <p style="color: var(--text-muted); margin-bottom: 24px;">Experience unparalleled luxury in this
+                    masterfully designed 5-bedroom villa. Nestled in the heart of Malibu, the Glass House offers
+                    panoramic ocean views and a seamless indoor-outdoor living experience.</p>
+                <p style="color: var(--text-muted);">Every detail has been curated with the finest materials, from
+                    Italian marble floors to custom smart home integration.</p>
+
+                <div class="amenities-grid">
+                    <div class="amenity-item"><span>Ã¢Å“â€œ</span> 5 Bedrooms</div>
+                    <div class="amenity-item"><span>Ã¢Å“â€œ</span> 4 Bathrooms</div>
+                    <div class="amenity-item"><span>Ã¢Å“â€œ</span> 4,200 sqft</div>
+                    <div class="amenity-item"><span>Ã¢Å“â€œ</span> Infinity Pool</div>
+                    <div class="amenity-item"><span>Ã¢Å“â€œ</span> Smart Home</div>
+                    <div class="amenity-item"><span>Ã¢Å“â€œ</span> 3-Car Garage</div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 40px 0;">
+
+                <h2 style="margin-bottom: 24px;">Location</h2>
+                <!-- Interactive Leaflet Map -->
+                <div id="property-map"></div>
+            </div>
+
+            <!-- Inquiry Sidebar -->
+            <aside>
+                <div class="inquiry-card">
+                    <h3 style="margin-bottom: 24px;">Schedule a Tour</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" name="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea name="message" rows="4"
+                                placeholder="I'm interested in this property..."></textarea>
+                        </div>
+                        <button class="search-btn" style="width: 100%; padding: 15px;">Send Inquiry</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 24px;">
+                    <a href="../../index.html"
+                        style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        Starline
+                    </a>
+                </div>
+                <p>The world's first minimalist real estate platform for high-end international living. Experience
+                    transparency, design, and luxury. Built by MrCodersHub.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="home.html">Home 2</a></li>
+                    <li><a href="listings.html">Listings</a></li>
+                    <li><a href="../../signature.html">Curated Estates</a></li>
+                    <li><a href="../../blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="../../privacy.html">Privacy Policy</a></li>
+                    <li><a href="../../terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-newsletter">
+                <h4>Join Our Journal</h4>
+                <p style="margin-bottom: 20px;">Dispatches from the intersection of architecture, wealth, and design.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email Address" required
+                        style="width: 100%; padding: 15px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: var(--border-radius-sm); margin-bottom: 15px; outline: none; font-size: 0.9rem;">
+                    <button type="submit" class="nav-cta" style="width: 100%; margin: 0;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 MrCodersHub. All rights reserved.</div>
+            <div style="display: flex; gap: 20px;">
+                <a href="../../privacy.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+                <a href="../../terms.html" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../src/js/admin-state.js"></script>
+    <script src="../../src/js/ui-utils.js"></script>
+    <script src="../../src/js/listings.js"></script>
+    <script src="../../src/js/search.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="../../src/js/property.js"></script>
+</body>
+
+</html>

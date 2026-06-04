@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Journal | Starline</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/logos/favicon.svg">
+    <style>
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-soft);
+            transition: var(--transition);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .blog-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .blog-info {
+            padding: 30px;
+        }
+
+        .blog-meta {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .sidebar-widget {
+            background: var(--bg-soft);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            margin-bottom: 40px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: var(--border-radius-sm);
+            border: 1px solid var(--border);
+            outline: none;
+        }
+
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .category-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-soft);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .blog-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <!-- Gradient accent line at top -->
+        <div class="header-accent-bar"></div>
+        <div class="nav-container">
+            <!-- Row 1: Logo | Nav (centered) | Actions -->
+            <div class="nav-top-row">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        <span>Starline</span>
+                    </a>
+                </div>
+                <!-- Centered Nav Links -->
+                <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="public/pages/home.html">Home 2</a>
+                    <a href="signature.html">Curated Estates</a>
+                    <a href="public/pages/listings.html">Listings</a>
+                    <a href="blog.html" class="nav-active">Blog</a>
+                    <a href="public/pages/about.html">About</a>
+                    <a href="public/pages/contact.html">Contact</a>
+                </nav>
+                <!-- Right: Account + Hamburger -->
+                <div class="nav-actions">
+                    <a href="login.html" id="dashboard-link" class="nav-cta" title="Account" style="width: 40px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Row 2: Search Bar -->
+            <div class="nav-search-row">
+                <div class="nav-search-glass">
+                    <input type="text" id="nav-search-query" placeholder="City, neighborhood, or property name...">
+                    <span class="nav-search-sep"></span>
+                    <input type="number" id="nav-search-investment" placeholder="Budget (USD)">
+                    <span class="nav-search-sep"></span>
+                    <select id="nav-search-type">
+                        <option value="buy">Purchase</option>
+                        <option value="rent">Lease</option>
+                    </select>
+                    <button class="nav-search-btn" id="nav-search-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Discover
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="section-padding">
+        <div class="container">
+            <h1 style="font-size: 3.5rem; letter-spacing: -2.5px; margin-bottom: 20px;">Lexicon of Luxury.</h1>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Dispatches from the intersection of architecture,
+                wealth, and design.</p>
+
+            <div class="blog-layout">
+                <!-- Posts Feed -->
+                <div>
+                    <div class="blog-grid">
+                        <div class="blog-card">
+                            <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=800"
+                                class="blog-img" alt="Blog Post">
+                            <div class="blog-info">
+                                <span class="blog-meta">Architecture &bull; Jan 12, 2026</span>
+                                <h3 style="margin-bottom: 15px;"><a href="blog-details.html"
+                                        style="color: inherit; text-decoration: none;">The Rise of "Invisible" Luxury
+                                        Estates</a></h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Why the
+                                    world's elite are moving towards minimalist, sub-terrain architecture...</p>
+                                <a href="blog-details.html"
+                                    style="font-weight: 700; font-size: 0.85rem; color: var(--text-main);">Read More &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="blog-card">
+                            <img src="assets/blog_investment.png"
+                                class="blog-img" alt="Blog Post">
+                            <div class="blog-info">
+                                <span class="blog-meta">Markets &bull; Jan 08, 2026</span>
+                                <h3 style="margin-bottom: 15px;"><a href="blog-details.html"
+                                        style="color: inherit; text-decoration: none;">2026 Real Estate Investment
+                                        Thesis</a></h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Analyzing
+                                    the impact of digital currency on global property transactions...</p>
+                                <a href="blog-details.html"
+                                    style="font-weight: 700; font-size: 0.85rem; color: var(--text-main);">Read More &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="blog-card">
+                            <img src="assets/blog_art_deco.png"
+                                class="blog-img" alt="Blog Post">
+                            <div class="blog-info">
+                                <span class="blog-meta">Design &bull; Jan 02, 2026</span>
+                                <h3 style="margin-bottom: 15px;"><a href="blog-details.html"
+                                        style="color: inherit; text-decoration: none;">The New Art Deco: Modernist
+                                        Revival</a></h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Retracing
+                                    the cultural shift back to opulent, geometric interior design...</p>
+                                <a href="blog-details.html"
+                                    style="font-weight: 700; font-size: 0.85rem; color: var(--text-main);">Read More &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="blog-card">
+                            <img src="assets/blog_ai_build.png"
+                                class="blog-img" alt="Blog Post">
+                            <div class="blog-info">
+                                <span class="blog-meta">Insights &bull; Dec 28, 2025</span>
+                                <h3 style="margin-bottom: 15px;"><a href="blog-details.html"
+                                        style="color: inherit; text-decoration: none;">How AI is Redefining Custom
+                                        Build</a></h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">From
+                                    generative layouts to predictive maintenance in smart estates...</p>
+                                <a href="blog-details.html"
+                                    style="font-weight: 700; font-size: 0.85rem; color: var(--text-main);">Read More &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside>
+                    <div class="sidebar-widget">
+                        <h4 style="margin-bottom: 20px;">Search Journal</h4>
+                        <input type="text" placeholder="Search insights..." class="search-input">
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h4 style="margin-bottom: 10px;">Categories</h4>
+                        <ul class="category-list">
+                            <li>Architecture <span>(12)</span></li>
+                            <li>Investment <span>(08)</span></li>
+                            <li>Design Trends <span>(15)</span></li>
+                            <li>Starline News <span>(04)</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget" style="background: var(--text-main); color: var(--white);">
+                        <h3 style="margin-bottom: 15px;">Weekly Digest</h3>
+                        <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 20px;">The world's most significant
+                            dispatches delivered to your email.</p>
+                        <input type="email" placeholder="Email Address"
+                            style="width: 100%; padding: 12px; border-radius: 4px; border: none; margin-bottom: 15px;">
+                        <button class="nav-cta"
+                            style="margin: 0; width: 100%; background: var(--white); color: #000;">Join List</button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 24px;">
+                    <a href="index.html"
+                        style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        Starline
+                    </a>
+                </div>
+                <p>The world's first minimalist real estate platform for high-end international living. Experience
+                    transparency, design, and luxury. Built by MrCodersHub.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="public/pages/home.html">Home 2</a></li>
+                    <li><a href="public/pages/listings.html">Listings</a></li>
+                    <li><a href="signature.html">Curated Estates</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="public/pages/contact.html">Help Center</a></li>
+                    <li><a href="public/pages/contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-newsletter">
+                <h4>Join Our Journal</h4>
+                <p style="margin-bottom: 20px;">Dispatches from the intersection of architecture, wealth, and design.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email Address" required
+                        style="width: 100%; padding: 15px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: var(--border-radius-sm); margin-bottom: 15px; outline: none; font-size: 0.9rem;">
+                    <button type="submit" class="nav-cta" style="width: 100%; margin: 0;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 MrCodersHub. All rights reserved.</div>
+            <div style="display: flex; gap: 20px;">
+                <a href="privacy.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+                <a href="terms.html" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="src/js/admin-state.js"></script>
+    <script src="src/js/ui-utils.js"></script>
+    <script src="src/js/listings.js"></script>
+    <script src="src/js/search.js"></script>
+</body>
+
+</html>

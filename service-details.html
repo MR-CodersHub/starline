@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Acquisition | Starline</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/logos/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .service-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .service-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-accordion {
+            margin-top: 60px;
+            display: grid;
+            gap: 20px;
+        }
+
+        .faq-card {
+            background: var(--white);
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-soft);
+            overflow: hidden;
+        }
+
+        .faq-header {
+            padding: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            user-select: none;
+        }
+
+        .faq-body {
+            padding: 0 24px 24px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .cta-box {
+            background: var(--bg-soft);
+            padding: 60px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <!-- Gradient accent line at top -->
+        <div class="header-accent-bar"></div>
+        <div class="nav-container">
+            <!-- Row 1: Logo | Nav (centered) | Actions -->
+            <div class="nav-top-row">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        <span>Starline</span>
+                    </a>
+                </div>
+                <!-- Centered Nav Links -->
+                <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="public/pages/home.html">Home 2</a>
+                    <a href="signature.html">Curated Estates</a>
+                    <a href="public/pages/listings.html">Listings</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="public/pages/about.html">About</a>
+                    <a href="public/pages/contact.html">Contact</a>
+                </nav>
+                <!-- Right: Account + Hamburger -->
+                <div class="nav-actions">
+                    <a href="login.html" id="dashboard-link" class="nav-cta" title="Account" style="width: 40px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Row 2: Search Bar -->
+            <div class="nav-search-row">
+                <div class="nav-search-glass">
+                    <input type="text" id="nav-search-query" placeholder="City, neighborhood, or property name...">
+                    <span class="nav-search-sep"></span>
+                    <input type="number" id="nav-search-investment" placeholder="Budget (USD)">
+                    <span class="nav-search-sep"></span>
+                    <select id="nav-search-type">
+                        <option value="buy">Purchase</option>
+                        <option value="rent">Lease</option>
+                    </select>
+                    <button class="nav-search-btn" id="nav-search-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Discover
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="service-hero">
+        <div class="container">
+            <h1 style="font-size: 3.5rem; letter-spacing: -2px;">Property Acquisition</h1>
+            <p style="font-size: 1.25rem; opacity: 0.9; margin-top: 16px;">Strategic guidance for significant real
+                estate investments.</p>
+        </div>
+    </section>
+
+    <main class="section-padding">
+        <div class="container service-content">
+            <h2 style="font-size: 2.25rem; margin-bottom: 30px;">Strategic Search & Acquisition</h2>
+            <div style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem; display: grid; gap: 24px;">
+                <p>Starline provides a uniquely personalized approach to property acquisition. We don't just find
+                    houses;
+                    we secure legacies. Our process begins with a deep physiological and architectural discovery phase
+                    where we understand not just what you need, but how you live.</p>
+                <p>Our advisors have access to the world's most exclusive off-market collections, ensuring that our
+                    clients are presented with opportunities that never reach the public eye.</p>
+
+                <h3 style="color: var(--text-main); margin-top: 30px;">Key Features</h3>
+                <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; list-style: none; padding: 0;">
+                    <li>Ã¢Å“â€œ Off-market property access</li>
+                    <li>Ã¢Å“â€œ Architectural integrity audit</li>
+                    <li>Ã¢Å“â€œ Private financial negotiation</li>
+                    <li>Ã¢Å“â€œ White-glove relocation support</li>
+                    <li>Ã¢Å“â€œ Heritage & History verification</li>
+                    <li>Ã¢Å“â€œ Discretion-first philosophy</li>
+                </ul>
+            </div>
+
+            <div class="faq-accordion">
+                <h2 style="font-size: 2rem; margin-bottom: 20px;">Common Inquiries</h2>
+                <div class="faq-card">
+                    <div class="faq-header">How long does the acquisition process take? <span
+                            style="font-size: 0.8rem;">Ã¢â€“Â¼</span></div>
+                    <div class="faq-body">Typically, a high-end acquisition takes between 3 to 6 months. This depends
+                        heavily on the rarity of your requirements and the complexity of the negotiation.</div>
+                </div>
+                <div class="faq-card">
+                    <div class="faq-header">Do you handle international legalities? <span
+                            style="font-size: 0.8rem;">Ã¢â€“Â¼</span></div>
+                    <div class="faq-body">Yes. Starline partners with top-tier international law firms to ensure all
+                        cross-border transactions are compliant with local inheritance, tax, and property laws.</div>
+                </div>
+                <div class="faq-card">
+                    <div class="faq-header">Can I visit properties virtually? <span style="font-size: 0.8rem;">Ã¢â€“Â¼</span>
+                    </div>
+                    <div class="faq-body">Absolutely. We offer 4K cinematic walkthroughs and VR-enabled live tours for
+                        our international clients who cannot travel immediately.</div>
+                </div>
+            </div>
+
+            <div class="cta-box">
+                <h2 style="margin-bottom: 24px;">Ready to find your masterpiece?</h2>
+                <p style="color: var(--text-muted); margin-bottom: 32px;">Schedule a private consultation with our
+                    acquisition desk.</p>
+                <a href="contact.html" class="nav-cta" style="margin: 0; padding: 18px 48px;">Begin Discovery</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 24px;">
+                    <a href="index.html"
+                        style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2Z M12 8.5L9.5 12L12 15.5L14.5 12Z" fill="currentColor" stroke="none"></path>
+                        </svg>
+                        Starline
+                    </a>
+                </div>
+                <p>The world's first minimalist real estate platform for high-end international living. Experience
+                    transparency, design, and luxury. Built by MrCodersHub.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="public/pages/home.html">Home 2</a></li>
+                    <li><a href="public/pages/listings.html">Listings</a></li>
+                    <li><a href="signature.html">Curated Estates</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="public/pages/contact.html">Help Center</a></li>
+                    <li><a href="public/pages/contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-newsletter">
+                <h4>Join Our Journal</h4>
+                <p style="margin-bottom: 20px;">Dispatches from the intersection of architecture, wealth, and design.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email Address" required
+                        style="width: 100%; padding: 15px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: var(--border-radius-sm); margin-bottom: 15px; outline: none; font-size: 0.9rem;">
+                    <button type="submit" class="nav-cta" style="width: 100%; margin: 0;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 MrCodersHub. All rights reserved.</div>
+            <div style="display: flex; gap: 20px;">
+                <a href="privacy.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+                <a href="terms.html" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core JS -->
+    <script src="src/js/admin-state.js"></script>
+    <script src="src/js/ui-utils.js"></script>
+    <script src="src/js/listings.js"></script>
+    <script src="src/js/search.js"></script>
+</body>
+
+</html>

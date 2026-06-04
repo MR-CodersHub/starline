@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Starline</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../src/css/admin-dashboard.css">
+    <link rel="icon" type="image/svg+xml" href="../../assets/logos/favicon.svg">
+    <script src="../../src/js/admin-state.js" defer></script>
+    <script src="../../src/js/user-dashboard-logic.js" defer></script>
+</head>
+
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-logo">
+                <a href="../../index.html" style="text-decoration: none; color: inherit;">Starline</a>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="index.html" class="menu-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="saved-properties.html" class="menu-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                    <span>My Properties</span>
+                </a>
+                <a href="profile.html" class="menu-link active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <span>Profile</span>
+                </a>
+                <a href="inquiries.html" class="menu-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
+                    <span>History</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../../index.html?logout=true" class="menu-link" style="color: #ff7675;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-content">
+            <header class="content-header">
+                <div class="header-title">
+                    <h1>Profile Settings</h1>
+                    <p>Manage your personal information and membership details.</p>
+                </div>
+                <div id="current-date" style="font-weight: 600; font-size: 0.9rem; color: var(--admin-text-muted);">
+                </div>
+            </header>
+
+            <section class="stat-card" style="max-width: 700px;">
+                <h3 style="font-size: 1.15rem; margin-bottom: 30px; font-weight: 700;">Account Details</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                    <div style="margin-bottom: 20px;">
+                        <label
+                            style="display: block; font-size: 0.8rem; color: var(--admin-text-muted); text-transform: uppercase; margin-bottom: 10px;">Full
+                            Name</label>
+                        <input type="text" id="profile-name" readonly
+                            style="width: 100%; padding: 14px; border: 1px solid var(--admin-border); border-radius: 12px; background: #f8fafc; font-weight: 600;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label
+                            style="display: block; font-size: 0.8rem; color: var(--admin-text-muted); text-transform: uppercase; margin-bottom: 10px;">Email
+                            Address</label>
+                        <input type="email" id="profile-email" readonly
+                            style="width: 100%; padding: 14px; border: 1px solid var(--admin-border); border-radius: 12px; background: #f8fafc; font-weight: 600;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <label
+                        style="display: block; font-size: 0.8rem; color: var(--admin-text-muted); text-transform: uppercase; margin-bottom: 10px;">Membership
+                        Status</label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="status-badge"
+                            style="background: #eff6ff; color: #2563eb; padding: 10px 20px; font-size: 0.9rem;">Standard
+                            Member</span>
+                    </div>
+                </div>
+                <button class="menu-link active"
+                    style="border: none; cursor: pointer; padding: 15px 35px; font-weight: 700;">Edit Profile</button>
+            </section>
+        </main>
+    </div>
+    <!-- Scripts -->
+    <script src="../../src/js/admin-state.js"></script>
+    <script src="../../src/js/user-dashboard-logic.js"></script>
+</body>
+
+</html>
